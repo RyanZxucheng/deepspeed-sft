@@ -76,6 +76,10 @@ XXX为你微调的模型地址，YYY是输出文件的地址
 ```bash
 quantize.exe YYY.gguf quantized_model.gguf q4_0
 ```
-前面是刚刚转换的gguf格式文件，后面是自己命名的量化文件,最后是的版本量化，可去官方查看有哪些参数
+前面是刚刚转换的gguf格式文件，后面是自己命名的量化文件,最后是的版本量化，可去官方查看有哪些参数，我自己的量化版本已上传至HuggingFace，感兴趣的小伙伴可自行[下载](https://huggingface.co/Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical-Q4_K_M-GGUF):
+```bash
+https://huggingface.co/Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical-Q4_K_M-GGUF
+```
+
 
 
