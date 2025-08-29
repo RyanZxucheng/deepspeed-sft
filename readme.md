@@ -44,4 +44,10 @@ python prompt_eval.py \
 --model_name_or_path_baseline XXX \
 --model_name_or_path_finetune XXX
 ```
-分别改成你的基座模型和微调模型的路径
+分别改成你的基座模型和微调模型的路径,如果想要直接先测试一下模型效果，我已经将训练好的模型上传到[HuggingFace](https://huggingface.co/Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical)上，或者直接将--model_name_or_path_finetune参数改为Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical
+```
+export CUDA_VISIBLE_DEVICES=0
+python prompt_eval.py \
+--model_name_or_path_baseline XXX \
+--model_name_or_path_finetune Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical
+```
