@@ -11,7 +11,7 @@
 </div>
 
 ## 🚀 介绍
-本项目基于 LLaMA3.1-8B-Chinese 开源基座模型，所用的GPU是4块NVIDIA RTX A6000，聚焦医学问答任务，设计并实现了一套大模型 领域化微调与部署流程。通过结合DeepSpeed分布式训练、LoRA微调、VLLM实现高并发推理在线服务端搭建、量化压缩、RAG 检索增强 等前沿技术，显著提升模型在专业医学问题上的回答准确率与专业度，同时大幅降低推理成本。因为这个是我在学习大模型时的项目，可能有一些问题，欢迎提issue，希望能对大家学习大模型有帮助。现在只有基于DeepSpeed分布式训练的代码，其他代码正在整理中。
+本项目基于 LLaMA3.1-8B-Chinese 开源基座模型，所用的GPU是4块NVIDIA RTX A6000，聚焦医学问答任务，设计并实现了一套大模型领域化微调与部署流程。通过结合DeepSpeed分布式训练、LoRA微调、VLLM实现高并发推理在线服务端搭建、量化压缩、RAG 检索增强 等前沿技术，显著提升模型在专业医学问题上的回答准确率与专业度，同时大幅降低推理成本。因为这个是我在学习大模型时的项目，可能有一些问题，欢迎提issue，希望能对大家学习大模型有帮助。现在只有基于DeepSpeed分布式训练的代码，其他代码正在整理中。
 ## 🔥 基于DeepSpeed的LoRA微调
 
 ### 🐼 安装依赖
@@ -52,7 +52,26 @@ python prompt_eval.py \
 --model_name_or_path_baseline XXX \
 --model_name_or_path_finetune Ryyyyyyyan/Llama3.1-8B-Chinese-sft-medical
 ```
+## 🔥 VLLM高并发推理服务
+### 🚀 介绍
+本项目基于 vLLM 高性能推理框架，充分利用其 Continuous Batching 机制，实现对海量并发请求的高吞吐批量推理能力。系统架构采用 uvicorn + FastAPI 构建异步 HTTP 服务，主线程通过 asyncio 将用户请求提交至 vLLM 推理队列，由独立推理线程完成动态合批计算，并异步返回结果。
 
+同时，项目支持 流式推理输出：vLLM 原生提供逐 token 生成能力，结合 FastAPI 可实现按 chunk 的流式响应，客户端可通过 requests 等库逐步接收并实时展示生成过程，从而带来低延迟、顺滑的交互体验。
+### 🐼 安装依赖
+```bash
+cd VLLM-server
+pip install -r requirements.txt
+```
+###  在线推理服务
+启动高并发在线推理服务
+```bash
+python vllm_server_llama.py
+```
+启动http客户端来访问之前部署好的推理服务
+```bash
+python vllm_client.py
+```
+这样你就可以对之前部署好的模型进行调用，并且可以流式返回推理结果。
 ## 🔥 基于llama.cpp的量化
 ### 🐼 安装依赖
 简易教程，如果有不懂的也可参考官方完整的llama.cpp[编译教程](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md)
