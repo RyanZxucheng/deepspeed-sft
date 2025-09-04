@@ -68,7 +68,7 @@ def parse_args():
     )
     parser.add_argument("--language",
                         type=str,
-                        default="English",
+                        default="Chinese",
                         choices=["English", "Chinese", "Japanese"])
     parser.add_argument(
         "--add_eot_token",
@@ -135,14 +135,14 @@ def prompt_eval(args, model_fintuned, tokenizer, device,
                 prompts):
     for prompt in prompts:
         inputs = tokenizer(prompt, return_tensors="pt").to(device)
-        # print("==========Baseline: Greedy=========")
-        # r_base = generate(model_baseline,
-        #                   tokenizer,
-        #                   inputs,
-        #                   num_beams=1,
-        #                   num_return_sequences=args.num_return_sequences,
-        #                   max_new_tokens=args.max_new_tokens)
-        # print_utils(r_base)
+        print("==========Baseline: Greedy=========")
+        r_base = generate(model_baseline,
+                          tokenizer,
+                          inputs,
+                          num_beams=1,
+                          num_return_sequences=args.num_return_sequences,
+                          max_new_tokens=args.max_new_tokens)
+        print_utils(r_base)
         print("==========finetune: Greedy=========")
         r_finetune_g = generate(model_fintuned,
                                 tokenizer,
@@ -204,14 +204,14 @@ def main():
     tokenizer = load_hf_tokenizer(args.model_name_or_path_baseline,
                                   fast_tokenizer=True,
                                   add_special_tokens=additional_special_tokens)
-    # model_baseline = create_hf_model(AutoModelForCausalLM,
-    #                                  args.model_name_or_path_baseline,
-    #                                  tokenizer, None)
+    model_baseline = create_hf_model(AutoModelForCausalLM,
+                                     args.model_name_or_path_baseline,
+                                     tokenizer, None)
     model_fintuned = create_hf_model(AutoModelForCausalLM,
                                      args.model_name_or_path_finetune,
                                      tokenizer, None)
 
-    # model_baseline.to(device)
+    model_baseline.to(device)
     model_fintuned.to(device)
 
     # One observation: if the prompt ends with a space " ", there is a high chance that

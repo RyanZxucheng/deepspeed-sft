@@ -27,7 +27,7 @@ deepspeed ../../main.py \
    --lora_module_name model.layers. \
    --per_device_train_batch_size 2 \
    --per_device_eval_batch_size 8 \
-   --num_train_epochs 10 \
+   --num_train_epochs 5 \
    --num_warmup_steps 20 \
    --max_seq_len 800 \
 

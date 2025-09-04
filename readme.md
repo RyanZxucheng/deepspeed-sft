@@ -71,7 +71,7 @@ python vllm_server_llama.py
 ```bash
 python vllm_client.py
 ```
-这样你就可以对之前部署好的模型进行调用，并且可以流式返回推理结果。
+这样你就可以对之前部署好的模型进行调用，并且可以流式返回推理结果
 ## 🔥 基于llama.cpp的量化
 ### 🐼 安装依赖
 简易教程，如果有不懂的也可参考官方完整的llama.cpp[编译教程](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md)
