@@ -400,6 +400,44 @@ class LocalJsonFileDataset(PromptRawDataset):
         return None
 
 
+# chinese dataset
+class medicalRmstaticDataset(PromptRawDataset):
+
+    def __init__(self, output_path, seed, local_rank, dataset_name):
+        self.output_path = output_path
+        self.seed = seed
+        self.local_rank = local_rank
+        self.dataset_name = "shibing624/medical"
+        self.dataset_name_clean = "shibing624_medical"
+        self.raw_datasets = load_dataset('json',
+                                    data_files={
+                                        "train":
+                                        '/models/zxc/rm_dataset/shibing624' + '/train.json',
+                                        "test":
+                                        '/models/zxc/rm_dataset/shibing624' + '/test.json'
+                                    })
+        pass
+    def get_train_data(self):
+        return self.raw_datasets["train"]
+
+    def get_eval_data(self):
+        return self.raw_datasets["test"]
+
+    def get_prompt(self, sample):
+        return sample['question']
+
+    def get_chosen(self, sample):
+        return sample['response_chosen']
+
+    def get_rejected(self, sample):
+        return sample['response_rejected']
+
+    def get_prompt_and_chosen(self, sample):
+        return sample['question'] + sample['response_chosen']
+
+    def get_prompt_and_rejected(self, sample):
+        return sample['question'] + sample['response_rejected']
+
 # Chinese dataset
 class Wangrui6ZhihuKOLDataset(PromptRawDataset):
 

@@ -24,11 +24,19 @@ pip install -r requirements.txt
 ```bash
 export HF_ENDPOINT=https://hf-mirror.com
 ```
-
+## 🕐 Step 1 - 有监督微调（Supervised Fine-Tuning）
 ###  启动训练
 ```bash
-cd training\supervised_finetuning\training_scripts\other_language
+cd training/supervised_finetuning/training_scripts/other_language
 bash run_chinese.sh ./output  #./output这个参数可以自己的换成输出目录
+```
+
+## 🕐 Step 2 - 基于人类反馈强化学习（RLHF）
+RLHF 是一种训练方法，用于让大语言模型（LLM）在生成内容时更符合人类期望。它结合了 强化学习（RL） 和 人类反馈（HF），不是单纯靠预测下一个词，而是让模型学会“什么是好的回答”。现有RLHF算法有：PPO，GRPO，DPO，我们这里用的是DPO。
+###  启动训练
+```bash
+cd training/dpo_finetuning/training_scripts/llama3
+bash run_llama3_7b_lora.sh ./output  #./output这个参数可以自己的换成输出目录
 ```
 
 ###  如何使用自己的数据集
