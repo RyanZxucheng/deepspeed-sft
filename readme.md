@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="./DeepSpeed-SFT/assets/image/ds-shiba.png" alt="DeepSpeed Shiba Inu!"/>
+<img src="./DeepSpeed-lora/assets/image/ds-shiba.png" alt="DeepSpeed Shiba Inu!"/>
 
 </p>
 
